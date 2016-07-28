@@ -21,7 +21,6 @@ import org.apache.lucene.document._
 import org.apache.lucene.facet.taxonomy.directory.DirectoryTaxonomyReader
 import org.apache.lucene.index.DirectoryReader
 import org.apache.lucene.search._
-import org.apache.spark.Logging
 import org.zouzias.spark.lucenerdd.LuceneRDD
 import org.zouzias.spark.lucenerdd.models.{SparkFacetResult, SparkScoreDoc}
 import org.zouzias.spark.lucenerdd.query.LuceneQueryHelpers
@@ -34,8 +33,7 @@ private[lucenerdd] class LuceneRDDPartition[T]
 (implicit docConversion: T => Document,
  override implicit val kTag: ClassTag[T])
   extends AbstractLuceneRDDPartition[T]
-  with IndexWithTaxonomyWriter
-  with Logging {
+  with IndexWithTaxonomyWriter {
 
   logInfo("Instance is created...")
 

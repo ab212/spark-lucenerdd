@@ -19,9 +19,9 @@ package org.zouzias.spark.lucenerdd
 
 import com.twitter.algebird.TopK
 import org.apache.lucene.document.Document
-import org.apache.spark._
 import org.apache.spark.rdd.RDD
 import org.apache.lucene.search.Query
+import org.apache.spark._
 import org.apache.spark.sql.{DataFrame, Row}
 import org.apache.spark.storage.StorageLevel
 import org.zouzias.spark.lucenerdd.aggregate.{SparkFacetResultMonoid, SparkScoreDocAggregatable}
@@ -37,8 +37,7 @@ import scala.reflect.ClassTag
  */
 class LuceneRDD[T: ClassTag](protected val partitionsRDD: RDD[AbstractLuceneRDDPartition[T]])
   extends RDD[T](partitionsRDD.context, List(new OneToOneDependency(partitionsRDD)))
-  with SparkScoreDocAggregatable
-  with Logging{
+  with SparkScoreDocAggregatable {
 
   logInfo("Instance is created...")
   logInfo(s"Number of partitions: ${partitionsRDD.count()}")
